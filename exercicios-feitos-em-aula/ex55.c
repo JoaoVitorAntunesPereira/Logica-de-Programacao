@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <ctype.h>
 //declaração de funções
-int contarVogais(char);
+int contarVogais55(char*);
 
 //declaração de variáveis globais
 
@@ -15,12 +15,12 @@ char palavra[10];
 int main(void){
   printf("Informe uma palavra de até 10 caracteres: ");
   scanf("%s", palavra);
-  printf("A palavra %s tem %i vogais.", palavra, contarVogais(palavra));
+  printf("A palavra %s tem %i vogais.", palavra, contarVogais55(palavra));
   return 0;
 }
 
 
-int contarVogais(char palavra){
+int contarVogais55(char *palavra){
   int i, vogais = 0;
 
   for(i = 0; i < 10; i++){
@@ -32,4 +32,3 @@ int contarVogais(char palavra){
 
   return vogais;
 }	
-
