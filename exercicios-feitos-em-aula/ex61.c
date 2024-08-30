@@ -22,6 +22,8 @@ int main(void){
   int opt, id;
   
   do{
+    system("cls");
+
     printf("\n[1]-Inserir\n[2]-Imprimir\n[3]-Buscar\n[4]-Buscar por nome\n[5]-Alterar um nome\n");
     fflush(stdin);
     scanf("%d",&opt);
@@ -37,12 +39,14 @@ int main(void){
     inserir(nome61);
     break;
       case 2:
-    imprimir();
+      imprimir();
+      pausa();
     break;
     case 3:
     printf("Informe o código para busca");
     fflush(stdin);
     scanf("%d",&id);
+    id--;
     char *busca = buscar(id);
     printf("Nome encontrado: %s", busca);
     pausa();
@@ -58,12 +62,18 @@ int main(void){
     }else{
       printf("Não achou o nome: %s", nomeBusca);
     }	
+    pausa();
   break;
     case 5:
     printf("Informe o código do nome que deseja alterar");
     scanf("%d",&id);
     id--;
-    alterarNome(id);
+    if(strcmp(buscar(id),"") != 0){
+      alterarNome(id);
+    }else{
+      printf("Falha ao buscar. Nome não encontrado");
+    }
+      
   break;
       default:
       printf("Opçao invalida, tente novamente");
@@ -82,9 +92,11 @@ void imprimir(void){
   for(j=0;j<i;j++){
     printf("%d- %s",(j+1),pessoas[j]);
   }
+  getchar();
 }
 
 void pausa(void){
+    fflush(stdin);
     getchar();
 }	
 
