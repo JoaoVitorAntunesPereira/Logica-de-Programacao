@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 //opçoes de limpar memoria
 //fflush(stdin);linux
 //__fpurge(stdin);linux
@@ -13,23 +14,27 @@ char* buscar(int);
 void pausa(void);
 char* buscarNome(char *);
 void alterarNome(int);
-int i = 0, j, aux;
+bool excluir(int);
+int verificarCodigo(int);
+
+int i = 0, j, aux, id;
 //variaveis
 char pessoas[100][50];
 
 int main(void){
   char nome61[50], nomeBusca[50];
-  int opt, id;
+  int opt;
+  char *busca;
   
   do{
     system("cls");
 
-    printf("\n[1]-Inserir\n[2]-Imprimir\n[3]-Buscar\n[4]-Buscar por nome\n[5]-Alterar um nome\n");
+    printf("\n[1]-Inserir\n[2]-Imprimir\n[3]-Buscar\n[4]-Buscar por nome\n[5]-Alterar um nome\n[6]-Excluir um nome\n");
     fflush(stdin);
     scanf("%d",&opt);
     switch(opt){
       case 0:
-    printf("Obrigado e até logo!!");
+    printf("Obrigado e ate logo!!");
     pausa();
   break;
       case 1:
@@ -37,18 +42,18 @@ int main(void){
       getchar();
     fgets(nome61, 50, stdin);
     inserir(nome61);
-    break;
+  break;
       case 2:
       imprimir();
       pausa();
-    break;
+  break;
     case 3:
-    printf("Informe o código para busca");
+    printf("Informe o codigo para busca: ");
     fflush(stdin);
     scanf("%d",&id);
-    id--;
-    char *busca = buscar(id);
+    busca = buscar(verificarCodigo(id));
     printf("Nome encontrado: %s", busca);
+    printf("%d", id);
     pausa();
   break;
     case 4:
@@ -58,25 +63,34 @@ int main(void){
 
     if(buscarNome(nomeBusca)){
       printf("Achou o nome: %s", nomeBusca);
-      printf("ID: %d", j+1);
+      printf("ID: %d", j);
     }else{
-      printf("Não achou o nome: %s", nomeBusca);
+      printf("Nao achou o nome: %s", nomeBusca);
     }	
     pausa();
   break;
     case 5:
-    printf("Informe o código do nome que deseja alterar");
+    printf("Informe o codigo do nome que deseja alterar");
     scanf("%d",&id);
-    id--;
     if(strcmp(buscar(id),"") != 0){
       alterarNome(id);
     }else{
-      printf("Falha ao buscar. Nome não encontrado");
+      printf("Falha ao buscar. Nome nao encontrado");
     }
-      
+  break;
+    case 6:
+    printf("Informe o codigo: ");
+    scanf("%d", &id);
+    
+    if (excluir(verificarCodigo(id))){
+      printf("Exclusao realizada.");
+    }else{
+      printf("Exclusao nao pode ser realizada");
+    }
+    pausa();
   break;
       default:
-      printf("Opçao invalida, tente novamente");
+      printf("Opcao invalida, tente novamente");
     break;
     }
   }while(opt!=0);
@@ -90,7 +104,7 @@ void inserir(char *nome){
 
 void imprimir(void){
   for(j=0;j<i;j++){
-    printf("%d- %s",(j+1),pessoas[j]);
+    printf("%d- %s",(j),pessoas[j]);
   }
   getchar();
 }
@@ -122,4 +136,32 @@ void alterarNome(int pos){
   fflush(stdin);
   fgets(nome, 50, stdin);
   strcpy(pessoas[pos], nome);
+}
+
+bool excluir(int id){
+  int j;
+  for(j = id; j < i; j++){
+    strcpy(pessoas[id], pessoas[id+1]);
+    id++;
+  }
+  i--;
+  return true;
+}
+
+
+int verificarCodigo(int id){
+  bool sair = false;
+
+  do{
+    if(id > (i - 1)){
+      printf("Codigo inexistente\nPor favor informe um codigo valido");
+      //__fpurge(stdin);
+      fflush(stdin);
+      scanf("%d", &id);
+    }else{
+      sair = true;
+    }
+  }while(!sair);
+
+  return id;
 }
