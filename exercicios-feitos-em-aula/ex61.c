@@ -27,7 +27,6 @@ int main(void){
   char *busca;
   
   do{
-    system("cls");
 
     printf("\n[1]-Inserir\n[2]-Imprimir\n[3]-Buscar\n[4]-Buscar por nome\n[5]-Alterar um nome\n[6]-Excluir um nome\n");
     fflush(stdin);
