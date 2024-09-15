@@ -1,25 +1,50 @@
-#include <stdio.h>
-#include <string.h>
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<stdbool.h>
+
 #include "fornecedores.c"
-#include <stdbool.h>
+#include "produtos.c"
 
-int ex65(void){
-    char nome[10];
-    char endereco[30];
+void pausa(void);
 
-    printf("Nome do fornecedor: ");
-    scanf("%s", nome);
-    __fpurge(stdin);
-    printf("Nome do endereco: ");
-    scanf("%s", endereco);
+int main(void){
+    int opt;
+    do{
+        printf("Informe a opção desejada\n");
+        printf("[0] - Sair\n");
+        printf("[1] - Registrar Fornecedor\n");
+        printf("[2] - Registrar Produto\n");
+        printf("[3] - Imprimir Fornecedores\n");
+        printf("[4] - Imprimir Produtos\n");
+        scanf("%d",&opt);
+        switch(opt){
+        case 0:
+            printf("Até logo\n");
+            pausa();
+            break;
+        case 1:
+            inserirFornecedor();
+            break;
+        case 2:
+            inserirProduto();
+            break;
+        case 3:
+            imprimirFornecedor();
+            pausa();
+            break;
+        case 4:
+            imprimirProduto();
+            pausa();
+            break;
 
-    inserir(nome, endereco);
-    imprimir();
+        }
+        system("cls");
+    }while(opt!=0);
     return 0;
 }
 
-void defin65(){
-  printf("Exercício 65:\n");
-  printf("Tipo Abstrato de Dado, com funções.\n");
-  printf("====================================================\n");
+void pausa(void){
+    fflush(stdin);
+    getchar();
 }
