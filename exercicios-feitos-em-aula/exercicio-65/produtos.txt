@@ -1,1 +1,4 @@
-trem 90.000000 pedro 
+trem 9.000000 vitor
+manteiga 10.000000 joao
+pote 12.000000 Antunes 
+pqe1 45.000000 joao
