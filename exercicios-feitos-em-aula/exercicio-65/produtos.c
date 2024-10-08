@@ -171,5 +171,3 @@ void alterarProduto(char *nome) {
 
     printf("Alteração realizada com sucesso.\n");
 }
-
-
