@@ -12,7 +12,7 @@ void criarLista(LISTA);
 void imprimirLista(LISTA);
 int contarElementosLista(LISTA);
 void inserirElementoLista(LISTA, char *);
-void excluirItemLista(LISTA, char *);
+void excluirElementoLista(LISTA, char *);
 
 int main(void){
 
@@ -22,33 +22,45 @@ int main(void){
 void opcoes(){
   int opt;
   char *elemento;
+  int items;
   printf("Informe a opção que deseja: \n");
   printf("1. Inserir elemento\n");
   printf("2. Retirar elemento\n");
-  printf("3. Criar lista\n");
+  printf("3. Criar/redefinir lista\n");
   printf("4. Contar elementos da lista\n");
   printf("5. Exibir o conteúdo da lista\n");
   printf("6. Sair\n");
+  __fpurge(stdin);
   scanf("%i", &opt);
 
   switch(opt){
     case 1:
       printf("Informe o elemento que deseja inserir\n");
+      __fpurge(stdin);
       fgets(elemento, sizeof(elemento), stdin);
       elemento[strcspn(elemento, "\n")] = '\0';
       inserirElementoLista(L1, elemento);
       opcoes();
       break;
     case 2:
+      printf("Informe o elemento que deseja retirar\n");
+      __fpurge(stdin);
+      fgets(elemento, sizeof(elemento), stdin);
+      elemento[strcspn(elemento, "\n")] = '\0';
+      excluirElementoLista(L1, elemento);
       opcoes();
       break;
     case 3:
+      criarLista(L1);
       opcoes();
       break;
     case 4:
+      items = contarElementosLista(L1);
+      printf("Existem %i elemetnos na lista", items);
       opcoes();
       break;
     case 5:
+      imprimirLista(L1);
       opcoes();
       break;
     case 6:
@@ -72,7 +84,7 @@ void imprimirLista(LISTA l){
   
   printf("Itens da lista\n");
   for(i = 0; i < MaxItens && strlen(l[i]) > 0; i++){
-    printf("%s",l[i]);
+    printf("\n%s",l[i]);
   }
 }
 
@@ -97,7 +109,7 @@ void inserirElementoLista(LISTA l, char *item){
   }
 }
 
-void excluirItemLista(LISTA l, char *item){
+void excluirElementoLista(LISTA l, char *item){
   int i;
   for(i = 0; i < MaxItens && strlen(l[i]) > 0 && (strcmp(l[i], item) != 0); i++);
   
