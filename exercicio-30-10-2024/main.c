@@ -30,13 +30,13 @@ void opcoes(){
   printf("4. Contar elementos da lista\n");
   printf("5. Exibir o conteúdo da lista\n");
   printf("6. Sair\n");
-  __fpurge(stdin);
+  fflush(stdin);
   scanf("%i", &opt);
 
   switch(opt){
     case 1:
       printf("Informe o elemento que deseja inserir\n");
-      __fpurge(stdin);
+        fflush(stdin);
       fgets(elemento, sizeof(elemento), stdin);
       elemento[strcspn(elemento, "\n")] = '\0';
       inserirElementoLista(L1, elemento);
@@ -44,7 +44,7 @@ void opcoes(){
       break;
     case 2:
       printf("Informe o elemento que deseja retirar\n");
-      __fpurge(stdin);
+        fflush(stdin);
       fgets(elemento, sizeof(elemento), stdin);
       elemento[strcspn(elemento, "\n")] = '\0';
       excluirElementoLista(L1, elemento);
